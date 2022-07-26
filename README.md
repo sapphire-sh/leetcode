@@ -1,3 +1,3 @@
 # leetcode
 
-https://leetcode.com/sapphiredev/
+https://leetcode.com/sapphire-sh/
