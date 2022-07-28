@@ -1,24 +1,23 @@
 /**
  * Definition for singly-linked list.
- * function ListNode(val) {
- *     this.val = val;
- *     this.next = null;
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
  * }
  */
 /**
  * @param {ListNode} head
  * @return {ListNode}
  */
-var middleNode = function(head) {
-    if(head === null) {
-        return head;
-    }
-    const x = [];
+ var middleNode = function(head) {
     let curr = head;
-    while(curr !== null) {
-        x.push(curr);
+    let p = curr;
+    while(curr.next !== null) {
+        p = p.next;
         curr = curr.next;
+        if(curr.next) {
+            curr = curr.next;
+        }
     }
-    const index = Math.ceil((x.length - 1) / 2);
-    return x[index];
+    return p;
 };
