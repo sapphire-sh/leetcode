@@ -2,20 +2,18 @@
  * @param {number} n
  * @return {string[]}
  */
-var fizzBuzz = function(n) {
-    return Array.from(Array(n)).map((e, i) => {
-        return i + 1;
-    }).map((e) => {
-        let str = [];
-        if(e % 3 === 0) {
-            str.push('Fizz');
+ var fizzBuzz = function(n) {
+    const p = Array.from(new Array(n)).map((_, i) => i + 1);
+    return p.map(q => {
+        if(q % 15 === 0) {
+            return 'FizzBuzz';
         }
-        if(e % 5 === 0) {
-            str.push('Buzz');
+        if(q % 5 === 0) {
+            return 'Buzz';
         }
-        if(str.length > 0) {
-            return str.join('');
+        if(q % 3 === 0) {
+            return 'Fizz';
         }
-        return e.toString();
-    });
+        return `${q}`;
+    })
 };
