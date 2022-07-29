@@ -3,32 +3,22 @@
  * @return {string}
  */
 var longestCommonPrefix = function(strs) {
-    if(strs.length < 1) {
-        return '';
-    }
-    if(strs.length < 2) {
-        return strs[0];
-    }
-    let c = [];
-    let i = 0;
-    while(true) {
-        const a = strs[0][i];
-        if(a === undefined) {
-            break;
-        }
-        let skip = false;
-        for(let j = 1; j < strs.length; ++j) {
-            const b = strs[j][i];
-            if(a !== b) {
-                skip = true;
+    const fn = (p, q) => {
+        const x = [];
+        for(let i = 0; i < p.length; ++i) {
+            if(p[i] !== q[i]) {
                 break;
             }
+            x.push(p[i]);
         }
-        if(skip === true) {
+        return x.join('');
+    };
+    let p = strs[0];
+    for(const str of strs) {
+        if(p === '') {
             break;
         }
-		++i;
-		c.push(a);
+        p = fn(p, str);
     }
-    return c.join('');
+    return p;
 };
