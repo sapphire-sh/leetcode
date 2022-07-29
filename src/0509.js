@@ -1,14 +1,17 @@
 /**
- * @param {number} N
+ * @param {number} n
  * @return {number}
  */
-const x = {
-    0: 0,
-    1: 1,
-};
-var fib = function(N) {
-    if(x[N] === undefined) {
-        x[N] = fib(N - 1) + fib(N - 2);
+ var fib = function(n) {
+    const t = {
+        0: 0,
+        1: 1,
+    };
+    const fn = n => {
+        if(t[n] === undefined) {
+            t[n] = fn(n - 1) + fn(n - 2);
+        }
+        return t[n];
     }
-    return x[N];
+    return fn(n);
 };
