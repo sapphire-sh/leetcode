@@ -2,32 +2,30 @@
  * @param {number[]} nums
  * @return {number[]}
  */
-var productExceptSelf = function(nums) {
-    const l = new Array(nums.length);
-    const r = new Array(nums.length);
+ var productExceptSelf = function(nums) {
+    const p = [];
+    const q = [];
     for(let i = 0; i < nums.length; ++i) {
+        const x = nums[i];
+        const y = nums[nums.length - 1 - i];
         if(i === 0) {
-            l[i] = nums[i];
+            p.push(x);
+            q.push(y);
         }
         else {
-            l[i] = l[i - 1] * nums[i];
+            p.push(p[i - 1] * x);
+            q.push(q[i - 1] * y);
         }
     }
-    for(let i = nums.length - 1; i >= 0; --i) {
-        if(i === nums.length - 1) {
-            r[i] = nums[i];
-        }
-        else {
-            r[i] = r[i + 1] * nums[i];
-        }
+    q.reverse();
+
+    const r = [];
+    for(let i = 0; i < nums.length; ++i) {
+        const x = p[i - 1] ?? 1;
+        const y = q[i + 1] ?? 1;
+
+        r.push(x * y);
     }
-    return nums.map((_, i) => {
-        if(i === 0) {
-            return r[1];
-        }
-        if(i === nums.length - 1) {
-            return l[i - 1];
-        }
-        return l[i - 1] * r[i + 1];
-    });
+
+    return r;
 };
