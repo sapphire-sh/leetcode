@@ -1,30 +1,38 @@
 /**
  * Definition for a binary tree node.
- * function TreeNode(val) {
- *     this.val = val;
- *     this.left = this.right = null;
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
  * }
  */
 /**
  * @param {TreeNode} root
  * @return {number}
  */
-var diameterOfBinaryTree = function(root) {
-    function search(node) {
-        if(node === null) { return -1; }
-        const a = search(node.left) + 1;
-        const b = search(node.right) + 1;
-        return Math.max(a, b);
-    }
-    function calc(node) {
-        if(node === null) { return 0; }
-        if(node.left === null && node.right === null) {
+ var diameterOfBinaryTree = function(root) {
+    const getHeight = root => {
+        if(root === null) {
             return 0;
         }
-        const a = search(node.left) + search(node.right) + 2;
-        const b = calc(node.left);
-        const c = calc(node.right);
-        return Math.max(a, b, c);
+        const p = getHeight(root.left);
+        const q = getHeight(root.right);
+        return Math.max(p, q) + 1;
+    };
+
+    if(root === null) {
+        return 0;
     }
-    return calc(root);
+
+    const p = diameterOfBinaryTree(root.left);
+    const q = diameterOfBinaryTree(root.right);
+
+    const a = getHeight(root.left);
+    const b = getHeight(root.right);
+
+    const r = a + b;
+
+    // console.log(p, q, a, b, r);
+
+    return Math.max(p, q, r);
 };
